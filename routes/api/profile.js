@@ -4,7 +4,6 @@ const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 
 const Profile = require('../../models/Profile');
-const User = require('../../models/User');
 
 // @route    GET api/profile/me
 // @desc     Get current users profile
@@ -13,7 +12,7 @@ router.get('/me', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
-    }).populate('user', ['name', 'avatar']);
+    });
 
     if (!profile) {
       return res.status(400).json({ msg: 'There is no profile for this user' });
@@ -85,15 +84,15 @@ router.post(
 // @desc     Delete profile
 // @access   Private
 router.delete('/', auth, async (req, res) => {
-    try {
-      // Remove profile
-      await Profile.findOneAndRemove({ user: req.user.id });
-  
-      res.json({ msg: 'Profile deleted' });
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server error');
-    }
-  });
+  try {
+    // Remove profile
+    await Profile.findOneAndRemove({ user: req.user.id });
+
+    res.json({ msg: 'Profile deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
 
 module.exports = router;
