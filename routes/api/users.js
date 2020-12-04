@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { validationResult, check } = require('express-validator');
+const auth = require('../../middleware/auth');
 
 const User = require('../../models/User');
 
@@ -70,5 +71,31 @@ router.post(
     }
   }
 );
+
+// @route    DELETE api/users/:id
+// @desc     Delete user
+// @access   Admin
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+
+    // Check if admin
+    if (config.get('admin') !== req.user.id) {
+      return res.status(404).json({ msg: 'User not authorized' });
+    }
+
+    await User.findByIdAndDelete(req.params.id);
+    return res.status(200).send('Success');
+  } catch (err) {
+    console.error(err.message);
+    if (!err.kind == 'ObjectId') {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+    return res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
