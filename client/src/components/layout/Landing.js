@@ -7,7 +7,7 @@ const Landing = () => {
         <section className="clean-block clean-catalog dark ">
           <div className="container">
             <div className="block-heading">
-              <h2 className="text-info">Catalog Page</h2>
+              <h2 className="text-info">Batukai </h2>
               <p>Čia galite išsirinkti jums patinkančius batukus</p>
             </div>
             <div className="content">

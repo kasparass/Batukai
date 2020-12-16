@@ -9,6 +9,8 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import Products from './components/products/Products';
+import Product from './components/product/Product';
 
 import './App.css';
 
@@ -30,10 +32,12 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar />
-          <Route exact path="/" component={Landing} />
           <section className="mt-9">
             <Alert />
             <Switch>
+              <Route exact path="/" component={Products} />
+              <Route exact path="/products" component={Products} />
+              <Route exact path="/products/:id" component={Product} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
             </Switch>

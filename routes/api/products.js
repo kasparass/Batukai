@@ -16,6 +16,7 @@ router.post(
     [
       check('text', 'Text is required').notEmpty(),
       check('title', 'Title is required').notEmpty(),
+      check('price', 'Price is required').notEmpty(),
     ],
   ],
   async (req, res) => {
@@ -191,40 +192,40 @@ router.post(
 // @desc     Delete comment
 // @access   Private
 router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
-    try {
-      const product = await Product.findById(req.params.id);
-  
-      if (!product) {
-        return res.status(404).json({ msg: 'Product does not exist' });
-      }
-  
-      //Pull out comment
-      const comment = product.comments.find(
-        (comment) => comment.id === req.params.comment_id
-      );
-  
-      // Make sure comment exists
-      if (!comment) {
-        return res.status(404).json({ msg: 'Comment does not exist' });
-      }
-  
-      // Check user
-      if (comment.user.toString() !== req.user.id) {
-        return res.status(401).json({ msg: 'User not authorized' });
-      }
-  
-      // Get remove index
-      removeIndex = product.comments
-        .map((comment) => comment.user.toString())
-        .indexOf(req.user.id);
-        product.comments.splice(removeIndex, 1);
-  
-      await product.save();
-      res.json(product.comments);
-    } catch (err) {
-      console.error(err.message);
-      return res.status(500).send('Server Error');
+  try {
+    const product = await Product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({ msg: 'Product does not exist' });
     }
-  });
+
+    //Pull out comment
+    const comment = product.comments.find(
+      (comment) => comment.id === req.params.comment_id
+    );
+
+    // Make sure comment exists
+    if (!comment) {
+      return res.status(404).json({ msg: 'Comment does not exist' });
+    }
+
+    // Check user
+    if (comment.user.toString() !== req.user.id) {
+      return res.status(401).json({ msg: 'User not authorized' });
+    }
+
+    // Get remove index
+    removeIndex = product.comments
+      .map((comment) => comment.user.toString())
+      .indexOf(req.user.id);
+    product.comments.splice(removeIndex, 1);
+
+    await product.save();
+    res.json(product.comments);
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

@@ -13,6 +13,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </Link>
       </li>
       <li class="nav-item" role="presentation">
+        <Link class="nav-link" to="/profile">
+          Profilis
+        </Link>
+      </li>
+      <li class="nav-item" role="presentation">
         <a onClick={logout} class="nav-link" href="#!">
           Atsijunkti
         </a>
