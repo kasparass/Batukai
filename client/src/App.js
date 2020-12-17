@@ -11,6 +11,10 @@ import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import Products from './components/products/Products';
 import Product from './components/product/Product';
+import Profile from './components/profile/Profile';
+import Cart from './components/cart/Cart';
+import CreateProduct from './components/product/CreateProduct';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 import './App.css';
 
@@ -40,6 +44,13 @@ const App = () => {
               <Route exact path="/products/:id" component={Product} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <PrivateRoute
+                exact
+                path="/create-product"
+                component={CreateProduct}
+              />
+              <PrivateRoute exact path="/profile" component={Profile} />
+              <PrivateRoute exact path="/cart" component={Cart} />
             </Switch>
           </section>
           <Footer />

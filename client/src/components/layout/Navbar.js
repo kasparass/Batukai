@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,7 +8,12 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul class="nav navbar-nav ml-auto">
       <li class="nav-item" role="presentation">
-        <Link class="nav-link" to="shopping-cart.html">
+        <Link class="nav-link" to="/create-product">
+          Sukurti Prekę
+        </Link>
+      </li>
+      <li class="nav-item" role="presentation">
+        <Link class="nav-link" to="/cart">
           Krepšelis
         </Link>
       </li>

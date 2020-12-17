@@ -1,51 +1,49 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import {
-  CLEAR_PRODUCT,
-  GET_PRODUCTS,
-  GET_PRODUCT,
-  PRODUCT_ERROR,
-} from './types';
+import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from './types';
 
-// Get all products
-export const getProducts = () => async (dispatch) => {
-  dispatch({ type: CLEAR_PRODUCT });
-
+// Get current users profile
+export const getCurrentProfile = () => async (dispatch) => {
   try {
-    const res = await axios.get('/api/products');
+    const res = await axios.get('/api/profile/me');
 
     dispatch({
-      type: GET_PRODUCTS,
+      type: GET_PROFILE,
       payload: res.data,
     });
   } catch (err) {
     dispatch({
-      type: PRODUCT_ERROR,
+      type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
 
-// Get product by ID
-export const getProductById = (productId) => async (dispatch) => {
+// Delete profile
+export const deleteProfile = (history) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/products/${productId}`);
+    const res = await axios.delete('/api/profile');
 
     dispatch({
-      type: GET_PRODUCT,
+      type: CLEAR_PROFILE,
       payload: res.data,
     });
+
+    dispatch(setAlert('Profile Removed'));
+    
+    history.push('/');
   } catch (err) {
     dispatch({
-      type: PRODUCT_ERROR,
+      type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
+
 };
 
-// Create or update product
-export const createProduct = (formData, history, edit = false) => async (
+// Create or update profile
+export const createProfile = (formData, history, edit = false) => async (
   dispatch
 ) => {
   try {
@@ -55,13 +53,14 @@ export const createProduct = (formData, history, edit = false) => async (
       },
     };
 
-    const res = await axios.post('/api/products', formData, config);
+    const res = await axios.post('/api/profile', formData, config);
+
     dispatch({
-      type: GET_PRODUCT,
+      type: GET_PROFILE,
       payload: res.data,
     });
 
-    dispatch(setAlert(edit ? 'Product Updated' : 'Product Created', 'success'));
+    dispatch(setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success'));
 
     if (!edit) {
       history.push('/'); // redirects in actions are different
@@ -74,7 +73,7 @@ export const createProduct = (formData, history, edit = false) => async (
     }
 
     dispatch({
-      type: PRODUCT_ERROR,
+      type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
