@@ -31,11 +31,11 @@ const CreateProduct = ({ createProduct, history }) => {
         <div className="clean-block clean-form dark">
           <div className="container pb-login">
             <div className="block-heading">
-              <h2 className="text-info">Add Product</h2>
+              <h2 className="text-info">Pridėti prekę</h2>
             </div>
             <form onSubmit={(e) => onSubmit(e)}>
               <div className="form-group">
-                <label for="email">Title</label>
+                <label for="email">Pavadinimas</label>
                 <input
                   className="form-control item"
                   type="text"
@@ -45,7 +45,7 @@ const CreateProduct = ({ createProduct, history }) => {
                 />
               </div>
               <div className="form-group">
-                <label for="password">Price</label>
+                <label for="password">Kaina</label>
                 <input
                   className="form-control"
                   type="text"
@@ -55,7 +55,7 @@ const CreateProduct = ({ createProduct, history }) => {
                 />
               </div>
               <div className="form-group" mb-5>
-                <label for="email">About the product</label>
+                <label for="email">Aprašykite informacija apie prekę</label>
                 <textarea
                   className="form-control item"
                   type="text"
@@ -65,7 +65,7 @@ const CreateProduct = ({ createProduct, history }) => {
                 />
               </div>
               <button className="btn btn-primary btn-block" type="submit">
-                Add product
+                Pridėti prekę
               </button>
             </form>
           </div>

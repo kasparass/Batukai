@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getProductById } from '../../actions/product';
 import { addToCart } from '../../actions/cart';
+import formatDate from '../../utils/formatDate';
 
 const Product = ({
   addToCart,
@@ -87,51 +88,20 @@ const Product = ({
                           role="tabpanel"
                           id="reviews"
                         >
-                          <div className="reviews">
-                            <div className="review-item">
-                              <h4>Incredible product</h4>
-                              <span className="text-muted">
-                                <a href="#">John Smith</a>, 20 Jan 2018
-                              </span>
-                              <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Donec augue nunc, pretium at
-                                augue at, convallis pellentesque ipsum. Lorem
-                                ipsum dolor sit amet, consectetur adipiscing
-                                elit.
-                              </p>
-                            </div>
-                          </div>
-                          <div className="reviews">
-                            <div className="review-item">
-                              <h4>Incredible product</h4>
-                              <span className="text-muted">
-                                <a href="#">John Smith</a>, 20 Jan 2018
-                              </span>
-                              <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Donec augue nunc, pretium at
-                                augue at, convallis pellentesque ipsum. Lorem
-                                ipsum dolor sit amet, consectetur adipiscing
-                                elit.
-                              </p>
-                            </div>
-                          </div>
-                          <div className="reviews">
-                            <div className="review-item">
-                              <h4>Incredible product</h4>
-                              <span className="text-muted">
-                                <a href="#">John Smith</a>, 20 Jan 2018
-                              </span>
-                              <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit. Donec augue nunc, pretium at
-                                augue at, convallis pellentesque ipsum. Lorem
-                                ipsum dolor sit amet, consectetur adipiscing
-                                elit.
-                              </p>
-                            </div>
-                          </div>
+                          {product.comments.length > 0 &&
+                            product.comments.map((comment) => (
+                              <Fragment>
+                                <div className="reviews">
+                                  <div className="review-item">
+                                    <h4>{comment.user + ' ' + comment.name}</h4>
+                                    <span className="text-muted">
+                                      {formatDate(comment.date)}
+                                    </span>
+                                    <p>{comment.text}</p>
+                                  </div>
+                                </div>
+                              </Fragment>
+                            ))}
                         </div>
                       </div>
                     </div>

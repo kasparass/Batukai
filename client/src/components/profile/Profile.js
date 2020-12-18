@@ -48,34 +48,17 @@ const Profile = ({
     createProfile(formData, history, edit);
   };
 
-  const modalDelete = () => {
-    <Fragment>
-      <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-body">
-            <p>Some text in the modal.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
-    </Fragment>;
-  };
-
   return (
     <Fragment>
       <section className="page login-page">
         <div className="clean-block clean-form dark">
           <div className="container pb-login">
             <div className="block-heading">
-              <h2 className="text-info">Profile</h2>
+              <h2 className="text-info">Profilis</h2>
             </div>
             <form>
               <div className="form-group">
-                <label>Surname</label>
+                <label>Vardas</label>
                 <input
                   className="form-control item"
                   type="text"
@@ -85,7 +68,7 @@ const Profile = ({
                 />
               </div>
               <div className="form-group">
-                <label>Lastname</label>
+                <label>Pavardė</label>
                 <input
                   className="form-control item"
                   type="text"
@@ -95,7 +78,7 @@ const Profile = ({
                 />
               </div>
               <div className="form-group">
-                <label>City</label>
+                <label>Miestas</label>
                 <input
                   className="form-control item"
                   type="text"
@@ -105,7 +88,7 @@ const Profile = ({
                 />
               </div>
               <div className="form-group">
-                <label>Address</label>
+                <label>Adresas</label>
                 <input
                   className="form-control item"
                   type="text"
@@ -115,7 +98,7 @@ const Profile = ({
                 />
               </div>
               <div className="form-group">
-                <label>Phone</label>
+                <label>Telefono numeris</label>
                 <input
                   className="form-control item"
                   type="text"
